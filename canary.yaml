@@ -1,0 +1,32 @@
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  name: simple-app
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: simple-app
+  service:
+    port: 80
+    targetPort: 8080
+  analysis:
+    interval: 20s
+    threshold: 10000
+    maxWeight: 50
+    stepWeight: 10
+    metrics:
+    - name: request-processing-seconds-avg
+      templateRef:
+        name: request-processing-seconds-avg
+        namespace: default
+      thresholdRange:
+        max: 3
+      interval: 5s
+    webhooks:
+      - name: load-test
+        url: http://flagger-loadtester.default/
+        timeout: 5s
+        metadata:
+          cmd: "hey -z 2m -q 1000 -c 2 http://simple-app-canary.default:80/"

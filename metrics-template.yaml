@@ -1,0 +1,11 @@
+apiVersion: flagger.app/v1beta1
+kind: MetricTemplate
+metadata:
+  name: request-processing-seconds-avg
+  namespace: default
+spec:
+  provider:
+    address: http://prometheus-prometheus.monitoring.svc.cluster.local:9090
+    type: prometheus
+  query: |
+    request_processing_seconds_sum / request_processing_seconds_count
