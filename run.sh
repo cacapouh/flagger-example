@@ -42,7 +42,7 @@ kubectl wait --for=condition=Ready pod --all --all-namespaces --timeout=-1s
 # デプロイ後のチェック
 minikube service prometheus-prometheus -n monitoring --url &
 minikube service simple-app --url &
-kubectl get events --watch --field-selector involvedObject.kind=Canary
+# kubectl get events --watch --field-selector involvedObject.kind=Canary
 
 # カナリアリリース
-kubectl set image deployment/simple-app simple-app=simple-app:1.0.1
+# kubectl set image deployment/simple-app simple-app=simple-app:1.0.1
