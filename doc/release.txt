@@ -1,0 +1,14 @@
+$ kubectl get events --watch --field-selector involvedObject.kind=Canary
+LAST SEEN   TYPE     REASON   OBJECT              MESSAGE
+0s          Normal   Synced   canary/simple-app   New revision detected! Scaling up simple-app.default
+0s          Normal   Synced   canary/simple-app   Starting canary analysis for simple-app.default
+0s          Normal   Synced   canary/simple-app   Advance simple-app.default canary weight 10
+0s          Warning   Synced   canary/simple-app   Halt advancement no values found for custom metric: request-processing-seconds-avg: no values found
+0s          Warning   Synced   canary/simple-app   Halt advancement no values found for custom metric: request-processing-seconds-avg: no values found
+0s          Normal    Synced   canary/simple-app   Advance simple-app.default canary weight 20
+0s          Normal    Synced   canary/simple-app   Advance simple-app.default canary weight 30
+0s          Normal    Synced   canary/simple-app   Advance simple-app.default canary weight 40
+0s          Normal    Synced   canary/simple-app   Advance simple-app.default canary weight 50
+0s          Normal    Synced   canary/simple-app   Copying simple-app.default template spec to simple-app-primary.default
+0s          Normal    Synced   canary/simple-app   Routing all traffic to primary
+0s          Normal    Synced   canary/simple-app   (combined from similar events): Promotion completed! Scaling down simple-app.default
